@@ -30,12 +30,17 @@ button {
 .operator {
     background-color: #bdbcbc;
     font-size: 28px;
-    height: 70px;
+    height: 50px;
+    padding-bottom: 40%;
 }
 
-#equal {
+.equal {
     grid-column: -2;
     grid-row: 2 / span 4;
     background-color: rgb(243, 108, 30);
     border-radius: 5px;
-  }
+}
+
+.darkKeyMode {
+    background-color: grey;
+}
