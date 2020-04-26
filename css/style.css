@@ -5,7 +5,7 @@
     margin-top: 50px;
 }
 
-.display {
+.calculator__display {
     height: 70px;
     text-align: right;
     padding: 20px;
@@ -21,20 +21,20 @@ button {
     padding: 25px;
 }
 
-.keys {
+.calculator__keys {
     display: grid;
     grid-gap: 1px;
     grid-template-columns: repeat(4, 1fr);
 }
 
-.operator {
+.key--operator {
     background-color: #bdbcbc;
     font-size: 28px;
     height: 50px;
     padding-bottom: 40%;
 }
 
-.equal {
+.key--equal {
     grid-column: -2;
     grid-row: 2 / span 4;
     background-color: rgb(243, 108, 30);
