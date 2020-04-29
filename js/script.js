@@ -17,7 +17,12 @@ window.addEventListener('DOMContentLoaded', function() {
             } else if (operator === 'divide') {
                 result = parseFloat(n1) / parseFloat(n2);
             }
-            return result;
+            if (result % 1 != 0) {
+                return result.toFixed(2);
+            } else {
+                return result;
+            }
+            
         };
 
     keys.addEventListener('click', e => {
@@ -31,7 +36,7 @@ window.addEventListener('DOMContentLoaded', function() {
             
             if (!action) {
                 console.log('Number key');
-                if (displayedNum === '0' || previousKeyType === 'operator') {
+                if (displayedNum === '0' || previousKeyType === 'operator' || previousKeyType === 'calculate') {
                     display.textContent = keyContent;
                 } else {
                     display.textContent = displayedNum + keyContent;
@@ -52,7 +57,7 @@ window.addEventListener('DOMContentLoaded', function() {
                         operator = calculator.dataset.operator,
                         secondValue = displayedNum;
                     
-                    if (firstValue && operator && previousKeyType != 'operator') {
+                    if (firstValue && operator && previousKeyType != 'operator' && previousKeyType != 'calculate') {
                         let calcValue = calculate(firstValue, operator, secondValue);
                         display.textContent = calcValue;
                         // Update calculated value as firstValue
@@ -72,16 +77,29 @@ window.addEventListener('DOMContentLoaded', function() {
                 console.log('Decimal key');
                 if (!displayedNum.includes('.')) {
                     display.textContent = displayedNum + '.';
-                } else if (previousKeyType === 'operator') {
+                } else if (previousKeyType === 'operator' || previousKeyType === 'calculate') {
                     display.textContent = '0.';
                 }
-                calculator.dataset.previousKeyType = 'dacimal';
+                calculator.dataset.previousKeyType = 'decimal';
             }
 
             if (action === 'clear') {
+                if (key.textContent === 'AC') {
+                    calculator.dataset.firstValue = '';
+                    calculator.dataset.modValue = '';
+                    calculator.dataset.operator = '';
+                    calculator.dataset.previousKeyType = '';
+                } else {
+                    key.textContent = 'AC';
+                }
                 console.log('Clear key');
-                display.textContent = '0';
+                display.textContent = 0;        
                 calculator.dataset.previousKeyType = 'clear';
+            }
+
+            if (action !== 'clear') {
+                let clearButton = calculator.querySelector('[data-action=clear]');
+                clearButton.textContent = 'CE';
             }
 
             if (action === 'calculate') {
@@ -101,7 +119,6 @@ window.addEventListener('DOMContentLoaded', function() {
                 calculator.dataset.modValue = secondValue;
                 calculator.dataset.previousKeyType = 'calculate';
             }
-
             
         }        
     });
