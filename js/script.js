@@ -6,6 +6,7 @@ window.addEventListener('DOMContentLoaded', function() {
         keys = document.querySelector('.calculator__keys'),
         display = document.querySelector('.calculator__display');
 
+        // Функция calculate
         let calculate = (n1, operator, n2) => {
             let result = '';
             if (operator === 'add') {
@@ -34,6 +35,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 displayedNum = display.textContent,
                 previousKeyType = calculator.dataset.previousKeyType;
             
+            // Нажимаем цифры
             if (!action) {
                 console.log('Number key');
                 if (displayedNum === '0' || previousKeyType === 'operator' || previousKeyType === 'calculate') {
@@ -47,7 +49,8 @@ window.addEventListener('DOMContentLoaded', function() {
             // remove darkKeyMode from all keys
             Array.from(key.parentNode.children)
                 .forEach(k => k.classList.remove('darkKeyMode'));
-
+            
+            // Нажимаем операторы
             if (action === 'add' || 
                 action === 'subtract' || 
                 action === 'multiply' || 
@@ -72,7 +75,8 @@ window.addEventListener('DOMContentLoaded', function() {
                     // add custom attribute
                     calculator.dataset.previousKeyType = 'operator';
             }
-
+            
+            // Нажимаем точку
             if (action === 'decimal') {
                 console.log('Decimal key');
                 if (!displayedNum.includes('.')) {
@@ -83,6 +87,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 calculator.dataset.previousKeyType = 'decimal';
             }
 
+            // Нажимаем очистить экран
             if (action === 'clear') {
                 if (key.textContent === 'AC') {
                     calculator.dataset.firstValue = '';
@@ -102,6 +107,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 clearButton.textContent = 'CE';
             }
 
+            // Нажимаем равно
             if (action === 'calculate') {
                 console.log('Calculate key');
                 let firstValue = calculator.dataset.firstValue,
@@ -118,8 +124,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 }
                 calculator.dataset.modValue = secondValue;
                 calculator.dataset.previousKeyType = 'calculate';
-            }
-            
+            } 
         }        
     });
 });
